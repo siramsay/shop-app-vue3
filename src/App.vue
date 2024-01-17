@@ -176,5 +176,15 @@ export default {
       >
     </section>
 
+  <!-- Start Screen -->
+  <div class="suggestion-outer-wrapper" v-if="newItem.length === 0 && !inputItem">
+    <h4>Suggested Regularly Bought</h4>
+    <div class="suggestion-wrapper">
+      <ul id="suggestion">
+        <li v-for="(item, index) in previousProduct" v-on:click="addPreviousItem(item)">{{ item }}</li>
+      </ul>
+    </div>
+  </div>
+
 </template>
 
