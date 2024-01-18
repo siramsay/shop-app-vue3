@@ -145,6 +145,12 @@ export default {
       return this.ratingsInfo.filter(el => el.title.match(filter))
     },
 
+    urgentItems(){
+      return this.shopList.filter(e => e.isUrgent === true)
+    },
+
+
+
     filterPre() {
 
       /* Filter
@@ -246,7 +252,9 @@ export default {
     <div class="sl-inner-wrapper">
       <div class="sl">
         <ul>
-          <li v-for="(item, index) in shopList.slice().reverse()">  <!-- Not working v-if="item.isUrgent" -->
+          <!-- Not working v-if="item.isUrgent" with v-for-->
+          <!-- <template v-for="(item, index) in urgentItems.slice().reverse()" :key="index"> -->
+          <li v-for="(item, index) in urgentItems.slice().reverse()" :key="index">
             <span class="item" v-if="!item.edit">
               <span class="product-title">{{ item.product }}</span>
               <span class="wrapper-button">
@@ -272,9 +280,8 @@ export default {
                 </span>
 
               <button v-on:click="item.edit = false" class="button-round">Save</button>
-              <!--<span></span>-->
-            </div>
 
+            </div>
 
           </li>
         </ul>
