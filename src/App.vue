@@ -265,8 +265,8 @@ export default {
               </span>
               <button v-on:click="item.edit = 'edit'" class="button-round">Edit</button> <!-- v-on:click="$set(item, 'edit', !item.edit)" -->
             </span>
-
-            <div class="item" v-if="item.edit">
+            <!--<div class="item" v-if="item.edit"> use v-else so the HTML v-if markup isn't rendered-->
+            <div class="item" v-else>
               <span class="product-title">{{ item.product }}</span>
 
               <span class="wrapper-button">
@@ -297,6 +297,7 @@ export default {
       <div class="sl">
         <ul>
           <li v-for="(item, index) in shopList.slice().reverse()" :key="index">
+
             <span class="item" v-if="!item.edit">
               <span class="product-title">{{ item.product }}</span>
               <span class="wrapper-button">
@@ -305,7 +306,8 @@ export default {
               <button v-on:click="item.edit = 'edit'" class="button-round">Edit</button> <!-- v-on:click="$set(item, 'edit', !item.edit)" -->
             </span>
 
-            <div class="item" v-if="item.edit">
+            <!--<div class="item" v-if="item.edit"> use v-else so the HTML v-if markup isn't rendered-->
+            <div class="item" v-else>
               <span class="product-title">{{ item.product }}</span>
 
               <span class="wrapper-button">
