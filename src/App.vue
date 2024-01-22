@@ -58,6 +58,9 @@ export default {
       this.newItem.push({index: item, itemName: item, num: 1});
       this.inputItem = '';
     },
+    cancelNewItem() {
+      this.newItem.pop();
+    },
     createShopListArray() {
       this.shopListArray = [];
       for (let i = 0; i < this.shopList.length; i++) {
@@ -236,6 +239,7 @@ export default {
         </span>
         </div>
         <div class="add-wrapper">
+          <button v-on:click="cancelNewItem" class="button-round">Cancel</button>
           <button v-on:click="addToShopList(index, item.itemName, item.num); currentList = false" class="button-round">Add</button>
           <button v-on:click="addToShopList(index, item.itemName, item.num, item.urgent = true); currentList = true" class="button-round">Urgent</button>
         </div>
