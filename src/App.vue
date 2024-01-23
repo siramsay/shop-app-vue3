@@ -46,10 +46,24 @@ export default {
     },
     addItem() {
       if (this.inputItem.length > 0) {
-        //this.newItem2 = this.newItem;
-        this.newItem.push({index: this.inputItem, itemName: this.inputItem, num: 1});
-        this.inputItem = '';
+
+        this.createShopListArray();
+        console.log('Shop List Generated: ',this.shopListArray)
+        const newStrIndex = this.shopListArray.indexOf(this.inputItem);
+        console.log(newStrIndex);
+
+        // if not in shop list add num is 1 : else item in shop list index is >= 0 then get quantity to add to num
+        if (newStrIndex === -1) {
+          this.newItem.push({index: this.inputItem, itemName: this.inputItem, num: 1});
+          this.inputItem = '';
+        } else {
+          alert('Item is already in list, you already have ' + this.shopList[newStrIndex].quantity  +  ' ' + this.inputItem);
+          this.newItem.push({index: this.inputItem, itemName: this.inputItem, num: this.shopList[newStrIndex].quantity });
+          this.inputItem = '';
+        }
+
         document.querySelector("input").blur();
+
       } else {
         alert("You need to add an item")
       }
