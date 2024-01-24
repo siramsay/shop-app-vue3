@@ -57,8 +57,14 @@ export default {
           this.newItem.push({index: this.inputItem, itemName: this.inputItem, num: 1});
           this.inputItem = '';
         } else {
-          alert('Item is already in list, you already have ' + this.shopList[newStrIndex].quantity  +  ' ' + this.inputItem);
-          this.newItem.push({index: this.inputItem, itemName: this.inputItem, num: this.shopList[newStrIndex].quantity });
+          //alert('Item is already in list, you already have ' + this.shopList[newStrIndex].quantity  +  ' ' + this.inputItem);
+          this.newItem.push({
+            index: this.inputItem,
+            itemName: this.inputItem,
+            num: 0,
+            currentQuantity: this.shopList[newStrIndex].quantity,
+            message: `Item is already in list, you already have ${this.shopList[newStrIndex].quantity} ${this.inputItem}`
+          });
           this.inputItem = '';
         }
 
@@ -227,12 +233,14 @@ export default {
   </div>
 
   <!-- Add Item(S) -->
-  <div class="suggestion-outer-wrapper add-item" v-if="newItem.length > 0 && !inputItem.length">
+
+  <div style="position: relative;" class="suggestion-outer-wrapper add-item" v-if="newItem.length > 0 && !inputItem.length">
+    <span style="position: absolute; top:0;" v-if="newItem[0].message">{{ newItem[0].message }}</span>
     <div v-if="newItem.length > 0" >
       <div v-for="(item, index) in newItem" class="add-outer-wrapper" >
-        <div class="add-wrapper" >
+        <div class="add-wrapper">
           <ul id="add">
-            <li>{{ item.itemName }}
+            <li>{{ item.itemName }} - {{ item.currentQuantity }}  -
               <select v-model.number="item.num">
                 <option v-for="selectNum in selectNums">{{ selectNum }}</option>
               </select>
