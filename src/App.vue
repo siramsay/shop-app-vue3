@@ -47,15 +47,15 @@ export default {
     addItem() {
       if (this.inputItem.length > 0) {
 
+        // Need to remove white space before checking if the input item is in the list
+
         this.createShopListArray();
-        console.log('Shop List Generated: ',this.shopListArray)
         const newStrIndex = this.shopListArray.indexOf(this.inputItem);
-        console.log(newStrIndex);
 
         // if not in shop list add num is 1 : else item in shop list index is >= 0 then get quantity to add to num
         if (newStrIndex === -1) {
           this.newItem.push({index: this.inputItem, itemName: this.inputItem, num: 1});
-          this.inputItem = '';
+          //this.inputItem = '';
         } else {
           //alert('Item is already in list, you already have ' + this.shopList[newStrIndex].quantity  +  ' ' + this.inputItem);
           this.newItem.push({
@@ -75,7 +75,29 @@ export default {
       }
     },
     addPreviousItem(item) {
-      this.newItem.push({index: item, itemName: item, num: 1});
+
+      this.createShopListArray();
+      const newStrIndex = this.shopListArray.indexOf(item);
+      console.log(newStrIndex)
+
+      //this.newItem.push({index: item, itemName: item, num: 1});
+
+      // Same block as aadItem()
+      // if not in shop list add num is 1 : else item in shop list index is >= 0 then get quantity to add to num
+      if (newStrIndex === -1) {
+        this.newItem.push({index: item, itemName: item, num: 1});
+        //this.inputItem = '';
+      } else {
+        //alert('Item is already in list, you already have ' + this.shopList[newStrIndex].quantity  +  ' ' + this.inputItem);
+        this.newItem.push({
+          index: item,
+          itemName: item,
+          num: 0,
+          currentQuantity: this.shopList[newStrIndex].quantity,
+          message: `Item is already in list, you already have ${this.shopList[newStrIndex].quantity} ${item}`
+        });
+      }
+
       this.inputItem = '';
     },
     cancelNewItem() {
@@ -113,7 +135,6 @@ export default {
 
         // This could be moved and created again if a new item is added instead of each time.
         this.createShopListArray();
-        console.log('SL: ',this.shopListArray)
         const newStrIndex = this.shopListArray.indexOf(newStr);
 
         if (newStrIndex === -1) {
@@ -386,8 +407,6 @@ export default {
     </li>
   </menu>
   </nav>
-
-
 
 </template>
 
