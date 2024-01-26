@@ -47,7 +47,7 @@ export default {
     addItem() {
       if (this.inputItem.length > 0) {
 
-        // Need to remove white space before checking if the input item is in the list
+        // Need to remove white space and capitalize before checking if the input item is in the list
 
         this.createShopListArray();
         const newStrIndex = this.shopListArray.indexOf(this.inputItem);
@@ -55,7 +55,7 @@ export default {
         // if not in shop list add num is 1 : else item in shop list index is >= 0 then get quantity to add to num
         if (newStrIndex === -1) {
           this.newItem.push({index: this.inputItem, itemName: this.inputItem, num: 1});
-          //this.inputItem = '';
+          this.inputItem = '';
         } else {
           //alert('Item is already in list, you already have ' + this.shopList[newStrIndex].quantity  +  ' ' + this.inputItem);
           this.newItem.push({
