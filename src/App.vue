@@ -109,8 +109,8 @@ export default {
         this.shopListArray.push(this.shopList[i].index);
       }
     },
-    addToShopList(index, itemName, num, urgent) {
-      if (num > 0) {
+    addToShopList(index, itemName, num, urgent, currentQuantity ) {
+      if (num > 0 || currentQuantity  > 0) {
         console.log(itemName);
 
         // Check for white space
@@ -283,8 +283,8 @@ export default {
         </div>
         <div class="add-wrapper">
           <button v-on:click="cancelNewItem" class="button-round">Cancel</button>
-          <button v-on:click="addToShopList(index, item.itemName, item.num); currentList = false" class="button-round">Add</button>
-          <button v-on:click="addToShopList(index, item.itemName, item.num, item.urgent = true); currentList = true" class="button-round">Urgent</button>
+          <button v-on:click="addToShopList(index, item.itemName, item.num, item.urgent = false, 4); currentList = false" class="button-round">Add</button>
+          <button v-on:click="addToShopList(index, item.itemName, item.num, item.urgent = true, item.currentQuantity); currentList = true" class="button-round">Urgent</button>
         </div>
       </div>
     </div>
