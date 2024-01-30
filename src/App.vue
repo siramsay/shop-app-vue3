@@ -49,8 +49,11 @@ export default {
 
         // Need to remove white space and capitalize before checking if the input item is in the list
 
+        const trimmedInputItem = this.inputItem.trim();
+        const capitalizedTrimmedInputItem = trimmedInputItem.replace(/\b\w/g, l => l.toUpperCase());
+
         this.createShopListArray();
-        const newStrIndex = this.shopListArray.indexOf(this.inputItem);
+        const newStrIndex = this.shopListArray.indexOf(capitalizedTrimmedInputItem);
 
         // if not in shop list add num is 1 : else item in shop list index is >= 0 then get quantity to add to num
         if (newStrIndex === -1) {
