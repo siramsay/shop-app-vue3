@@ -5,8 +5,18 @@ export default {
     item: {
       type: Object,
       required: true,
-    },
+    }
+  },
+  emits: ["edit-name"],
+  data: () => ({
+    edit: false
+  }),
+  methods: {
+    tellParentEditItem() {
+      this.$emit("edit-name")
+    }
   }
+
 }
 
 </script>
@@ -16,17 +26,21 @@ export default {
 
   <li>
     <!-- <span class="item" v-if="!item.edit">  -->
-    <span class="item">
+    <span class="item" v-if="!item.edit">
               <span class="product-title">{{ item.product }}</span>
               <span class="wrapper-button">
                 <span>{{ item.quantity }}</span>
               </span>
+
               <button v-on:click="item.edit = 'edit'" class="button-round">Edit</button>
       <!-- v-on:click="$set(item, 'edit', !item.edit)" -->
+      <!-- @click="tellParentEditItem" -->
     </span>
-    <!--<div class="item" v-if="item.edit"> use v-else so the HTML v-if markup isn't rendered
+    <!--<div class="item" v-if="item.edit"> use v-else so the HTML v-if markup isn't rendered-->
     <div class="item" v-else>
-      <span class="product-title">{{ item.product }}</span>
+      boom
+    </div>
+    <!--  <span class="product-title">{{ item.product }}</span>
 
       <span class="wrapper-button">
                    <button :disabled="item.quantity <= 1" v-on:click="item.quantity = item.quantity-1">

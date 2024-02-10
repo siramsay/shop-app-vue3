@@ -49,6 +49,9 @@ export default {
       //document.querySelector("input").classList.add('add-item');
       //}
     },
+    editItem() {
+      this.edit = true;
+    },
     addItem() {
       if (this.inputItem.length > 0) {
 
@@ -314,13 +317,14 @@ export default {
           <!-- <template v-for="(item, index) in urgentItems.slice().reverse()" :key="index"> -->
 
 
-
+          <!--<li v-for="(item, index) in urgentItems.slice().reverse()" :key="index">-->
         <ItemCard
-            v-for="item in shopList"
+            v-for="item in urgentItems.slice().reverse()"
             :item="item"
-            :key="`bruser-${item.index}`"
+            :key="`item-${item.index}`"
+            v-on:edit-item="editItem"
         />
-        <!--v-on:change-name="changeName"-->
+
         </ul>
       </div>
     </div>
