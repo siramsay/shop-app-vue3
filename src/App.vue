@@ -1,6 +1,5 @@
-
-<script>
-// script setup lang="ts">
+<script lang="ts"> // do not use setup
+//<script setup lang="ts">
 //import { RouterLink, RouterView } from 'vue-router'
 //import HelloWorld from './components/HelloWorld.vue'
 
@@ -27,12 +26,9 @@ export default {
         {index: 'Almond  Milk', product: 'Almond Milk', quantity: 1},
         {index: 'Cookies', product: 'Cookies', quantity: 1}
       ],
-      //selected: undefined,
       placeHolder: '',
       previousProduct: ['Fish', 'Burgers', 'Potatoes', 'Apples', 'Pancake Mix', 'Chicken', 'Chilli', 'Chocolate','Beer','Lemon Juice','Pork'],
       preFilter: [],
-      //edit: false,
-      //
       filterText: ''
     }
   },
@@ -65,7 +61,6 @@ export default {
           this.newItem.push({index: this.inputItem, itemName: this.inputItem, num: 1});
           this.inputItem = '';
         } else {
-          //alert('Item is already in list, you already have ' + this.shopList[newStrIndex].quantity  +  ' ' + this.inputItem);
           this.newItem.push({
             index: this.inputItem,
             itemName: this.inputItem,
@@ -88,15 +83,11 @@ export default {
       const newStrIndex = this.shopListArray.indexOf(item);
       console.log(newStrIndex)
 
-      //this.newItem.push({index: item, itemName: item, num: 1});
-
-      // Same block as aadItem()
+      // Same block as addItem()
       // if not in shop list add num is 1 : else item in shop list index is >= 0 then get quantity to add to num
       if (newStrIndex === -1) {
         this.newItem.push({index: item, itemName: item, num: 1});
-        //this.inputItem = '';
       } else {
-        //alert('Item is already in list, you already have ' + this.shopList[newStrIndex].quantity  +  ' ' + this.inputItem);
         this.newItem.push({
           index: item,
           itemName: item,
@@ -158,7 +149,7 @@ export default {
 
         // check is already in the shopping and offer to merge
         this.previousProduct.includes(newStr) ? console.log('Already in the list') : this.previousProduct.push(newStr);
-        // if includes then push a mark to say it has been add before, removed, bought.
+        // if includes then push a mark to say it has been added before, removed, bought.
         //document.querySelector("input.add-item").setAttribute('placeholder', "&#xF044");
         //document.querySelector("input").style.fontSize = '2em';
         document.querySelector("input").classList.remove('add-item');
@@ -204,8 +195,6 @@ export default {
       return this.shopList.filter(e => e.isUrgent === false)
     },
 
-
-
     filterPre() {
 
       /* Filter
@@ -233,7 +222,7 @@ export default {
           v-model="inputItem"
           v-on:keyup.enter="addItem"
           placeholder="&#xf055 "
-          style="font-family:Arial, FontAwesome; font-size: 1em"
+          style="font-family:Arial, FontAwesome, 'sans-serif'; font-size: 1em"
       >
     </section>
 
@@ -310,20 +299,16 @@ export default {
     <div class="sl-inner-wrapper">
       <div class="sl">
         <ul>
-          <!-- Not working v-if="item.isUrgent" with v-for-->
-          <!-- <template v-for="(item, index) in urgentItems.slice().reverse()" :key="index"> -->
-          <!--<li v-for="(item, index) in urgentItems.slice().reverse()" :key="index">-->
         <ItemCard
             v-for="item in urgentItems.slice().reverse()"
             :item="item"
             :key="`item-${item.index}`"
         />
-
         </ul>
       </div>
     </div>
   </section>
-
+  <!-- all -->
   <section v-else class="sl-wrapper">
     <div class="sl-inner-wrapper">
       <div class="sl">
