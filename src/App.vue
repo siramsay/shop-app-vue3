@@ -4,15 +4,17 @@
 //import HelloWorld from './components/HelloWorld.vue'
 
 import ItemCard from "./components/ItemCard.vue";
+import AddItem from "./components/AddItem.vue";
 export default {
   components: {
     ItemCard,
+    AddItem,
   },
   data() {
     return {
       currentList: true,
       inputItem: '',
-      newItem: [],
+      newItems: [],
       selectNums: [],
       shopListArray: [],
       shopList: [
@@ -77,7 +79,7 @@ export default {
         alert("You need to add an item")
       }
     },
-    addPreviousItem(item) {
+    addPreviousItem(item:any, index:any) {
 
       this.createShopListArray();
       const newStrIndex = this.shopListArray.indexOf(item);
@@ -86,10 +88,10 @@ export default {
       // Same block as addItem()
       // if not in shop list add num is 1 : else item in shop list index is >= 0 then get quantity to add to num
       if (newStrIndex === -1) {
-        this.newItem.push({index: item, itemName: item, num: 1});
+        this.newItems.push({index: index, itemName: item, num: 1});
       } else {
-        this.newItem.push({
-          index: item,
+        this.newItems.push({
+          index: index,
           itemName: item,
           num: 0,
           currentQuantity: this.shopList[newStrIndex].quantity,
@@ -227,11 +229,12 @@ export default {
     </section>
 
   <!-- Start Screen -->
-  <div class="suggestion-outer-wrapper" v-if="newItem.length === 0 && !inputItem">
+  <div class="suggestion-outer-wrapper" v-if="newItems.length === 0 && !inputItem">
     <h4>Suggested Regularly Bought</h4>
     <div class="suggestion-wrapper">
       <ul id="suggestion">
-        <li v-for="(item, index) in previousProduct" v-on:click="addPreviousItem(item)">{{ item }}</li>
+        <li v-for="(item, index) in previousProduct"
+            v-on:click="addPreviousItem(item, index)">{{ item }}</li>
       </ul>
     </div>
   </div>
@@ -243,7 +246,7 @@ export default {
         <ul id="previous">
           <li id="prev"
               v-for="(item, index) in filterPre"
-              v-on:click="addPreviousItem(item)">{{ item }}
+              v-on:click="addPreviousItem(item, index)">{{ item }}
           </li>
         </ul>
       </div>
@@ -252,50 +255,24 @@ export default {
 
   <!-- Add Item(S) -->
 
-  <div style="position: relative;" class="suggestion-outer-wrapper add-item" v-if="newItem.length > 0 && !inputItem.length">
-    <span style="position: absolute; top:0;" v-if="newItem[0].message">{{ newItem[0].message }}</span>
-    <div v-if="newItem.length > 0" >
-      <div v-for="(item, index) in newItem" class="add-outer-wrapper" >
-        <div class="add-wrapper">
-          <ul id="add">
-            <li>{{ item.itemName }} - {{ item.currentQuantity }}  -
-              <select v-model.number="item.num">
-                <option v-for="selectNum in selectNums">{{ selectNum }}</option>
-              </select>
-            </li>
-          </ul>
-
-          <span class="wrapper-button">
-          <button :disabled="item.num <= 1"  v-on:click="item.num = item.num-1" class="button-circle">
-             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM184 232H328c13.3 0 24 10.7 24 24s-10.7 24-24 24H184c-13.3 0-24-10.7-24-24s10.7-24 24-24z"/></svg>
-          </button>
-          <button v-on:click="item.num = item.num+1" class="button-circle">
-             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
-            <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-            <path
-                d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/>
-          </svg>
-          </button>
-        </span>
-        </div>
-        <div class="add-wrapper">
-          <button v-on:click="cancelNewItem" class="button-round">Cancel</button>
-          <button v-on:click="addToShopList(index, item.itemName, item.num, item.urgent = false, 4); currentList = false" class="button-round">Add</button>
-          <button v-on:click="addToShopList(index, item.itemName, item.num, item.urgent = true, item.currentQuantity); currentList = true" class="button-round">Urgent</button>
-        </div>
-      </div>
-    </div>
+  <!-- v-for="newItem in newItems" :item="newItems"-->
+  <div style="position: relative;" class="suggestion-outer-wrapper add-item" v-if="newItems.length > 0 && !inputItem.length">
+    <AddItem
+        :new-items="newItems"
+        :key="`newItem-${newItems}`"
+        :item="newItems"
+    />
   </div>
 
   <!-- Lists -->
 
   <div class="tabs">
-    <h3 v-on:click="currentList = false" v-bind:class="(currentList === true)?'blue':''">Shopping List</h3>
-    <h3 v-on:click="currentList = true" v-bind:class="(currentList === false)?'orange':''">Urgent</h3>
+    <h3 v-on:click="currentList = false" v-bind:class="(currentList)?'blue':''">Shopping List</h3>
+    <h3 v-on:click="currentList = true" v-bind:class="(!currentList)?'orange':''">Urgent</h3>
   </div>
 
   <!-- isUrgent -->
-  <section v-if="currentList === true" class="sl-wrapper">
+  <section v-if="currentList" class="sl-wrapper">
     <div class="sl-inner-wrapper">
       <div class="sl">
         <ul>
