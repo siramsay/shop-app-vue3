@@ -1,17 +1,33 @@
 <script lang="ts">
 export default {
   props: {
-    item: {
-      type: Object,
-      required: true,
-    },
+    // If you have this prop. you will get a warning in console it is missing
+    // you  need to add :item="newItems" to the AddItem component in the App.vue
+    //item: {
+    //  type: Object,
+    //  required: true,
+    //},
     newItems: {
       type: Object,
       required: true,
     }
   },
+  emits: ["cancel-item"],
   data: () => ({
+    selectNums: [],
   }),
+  methods: {
+    cancelNewItem() {
+      this.$emit("cancel-item");
+    },
+    makeSequence() {
+      this.selectNums = [...Array(101).keys()]  //  todo: slice/pop 0 off the front
+    },
+  },
+  // Created cycle hook
+  created() {
+    this.makeSequence();
+  }
 }
 </script>
 <template>

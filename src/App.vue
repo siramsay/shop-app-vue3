@@ -102,7 +102,7 @@ export default {
       this.inputItem = '';
     },
     cancelNewItem() {
-      this.newItem.pop();
+      this.newItems.pop();
     },
     createShopListArray() {
       this.shopListArray = [];
@@ -209,9 +209,10 @@ export default {
 
     }
   },
-  created() {
+  // Moved to component
+  /*created() {
     this.makeSequence();
-  }
+  } */
 }
 
 </script>
@@ -259,10 +260,10 @@ export default {
   <div style="position: relative;" class="suggestion-outer-wrapper add-item" v-if="newItems.length > 0 && !inputItem.length">
     <AddItem
         :new-items="newItems"
-        :key="`newItem-${newItems}`"
-        :item="newItems"
+        v-on:cancel-item="cancelNewItem"
     />
   </div>
+<!-- :key="`newItem-${newItems.id}`" key only need in v-for  -->
 
   <!-- Lists -->
 
