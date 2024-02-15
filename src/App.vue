@@ -110,9 +110,10 @@ export default {
         this.shopListArray.push(this.shopList[i].index);
       }
     },
-    addToShopList(index, itemName, num, urgent, currentQuantity ) {
-      if (num > 0 || currentQuantity  > 0) {
-        console.log(itemName);
+    //addToShopList(index, itemName, num, urgent, currentQuantity ) {
+    addToShopList(payload:object) {
+      if (payload.num > 0 || payload.currentQuantity  > 0) {
+        console.log(payload.itemName);
 
         // Check for white space
         const stringLength = itemName.length;
@@ -261,6 +262,7 @@ export default {
     <AddItem
         :new-items="newItems"
         v-on:cancel-item="cancelNewItem"
+        v-on:add-to-shop-list="addToShopList"
     />
   </div>
 <!-- :key="`newItem-${newItems.id}`" key only need in v-for  -->

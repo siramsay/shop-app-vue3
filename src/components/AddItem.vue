@@ -12,11 +12,21 @@ export default {
       required: true,
     }
   },
-  emits: ["cancel-item"],
+  emits: ["cancel-item","add-to-shop-list"],
   data: () => ({
     selectNums: [],
   }),
   methods: {
+    addToShopList () {
+      this.$emit('add-to-shop-list', {
+        index: 'index',
+        itemName: this.newItems[0].itemName,
+        num: 3,
+        urgent: false,
+        currentQuantity: 4,
+        currentList: false
+      },)
+    },
     cancelNewItem() {
       this.$emit("cancel-item");
     },
@@ -58,7 +68,7 @@ export default {
         </div>
         <div class="add-wrapper">
           <button v-on:click="cancelNewItem" class="button-round">Cancel</button>
-          <button v-on:click="addToShopList(index, item.itemName, item.num, item.urgent = false, 4); currentList = false" class="button-round">Add</button>
+          <button @click="addToShopList" class="button-round">Add</button>
           <button v-on:click="addToShopList(index, item.itemName, item.num, item.urgent = true, item.currentQuantity); currentList = true" class="button-round">Urgent</button>
         </div>
       </div>
