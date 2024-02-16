@@ -1,4 +1,6 @@
 <script lang="ts">
+
+
 export default {
   props: {
     // If you have this prop. you will get a warning in console it is missing
@@ -14,24 +16,36 @@ export default {
   },
   emits: ["cancel-item","add-to-shop-list"],
   data: () => ({
-    selectNums: [],
+    selectNums: []
   }),
   methods: {
-    addToShopList () {
+    addToShopList(currentList:boolean, num:number) {
       this.$emit('add-to-shop-list', {
         index: 'index',
+        //
         itemName: this.newItems[0].itemName,
-        num: 3,
+        num: num,
         urgent: false,
         currentQuantity: 4,
-        currentList: false
-      },)
+        currentList: currentList
+      })
+    },
+    addToUrgentShopList(currentList:boolean, num:number) {
+      this.$emit('add-to-shop-list', {
+        index: 'index',
+        //
+        itemName: this.newItems[0].itemName,
+        num: num,
+        urgent: true,
+        currentQuantity: 4,
+        currentList: currentList
+      })
     },
     cancelNewItem() {
       this.$emit("cancel-item");
     },
-    makeSequence() {
-      this.selectNums = [...Array(101).keys()]  //  todo: slice/pop 0 off the front
+    makeSequence(): Array<number> {
+      return this.selectNums = [...Array(101).keys()]  //  todo: slice/pop 0 off the front
     },
   },
   // Created cycle hook
@@ -67,9 +81,9 @@ export default {
         </span>
         </div>
         <div class="add-wrapper">
-          <button v-on:click="cancelNewItem" class="button-round">Cancel</button>
-          <button @click="addToShopList" class="button-round">Add</button>
-          <button v-on:click="addToShopList(index, item.itemName, item.num, item.urgent = true, item.currentQuantity); currentList = true" class="button-round">Urgent</button>
+          <button @click="cancelNewItem" class="button-round">Cancel</button>
+          <button @click="addToShopList(false, item.num)" class="button-round">Add</button>
+          <button @click="addToUrgentShopList(true, item.num)" class="button-round">Urgent</button>
         </div>
       </div>
     </div>

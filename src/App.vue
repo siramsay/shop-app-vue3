@@ -8,7 +8,7 @@ import AddItem from "./components/AddItem.vue";
 export default {
   components: {
     ItemCard,
-    AddItem,
+    AddItem
   },
   data() {
     return {
@@ -60,10 +60,10 @@ export default {
 
         // if not in shop list add num is 1 : else item in shop list index is >= 0 then get quantity to add to num
         if (newStrIndex === -1) {
-          this.newItem.push({index: this.inputItem, itemName: this.inputItem, num: 1});
+          this.newItems.push({index: this.inputItem, itemName: this.inputItem, num: 1});
           this.inputItem = '';
         } else {
-          this.newItem.push({
+          this.newItems.push({
             index: this.inputItem,
             itemName: this.inputItem,
             num: 0,
@@ -115,9 +115,10 @@ export default {
       if (payload.num > 0 || payload.currentQuantity  > 0) {
         console.log(payload.itemName);
 
+        this.currentList = payload.currentList;
         // Check for white space
-        const stringLength = itemName.length;
-        const lastChar = itemName.charAt(stringLength - 1);
+        const stringLength = payload.itemName.length;
+        const lastChar = payload.itemName.charAt(stringLength - 1);
         const inValid = /\s/;
         // str.replace(/\s+/g, '');  // removes all white space
         const k = inValid.test(lastChar);
@@ -126,10 +127,10 @@ export default {
         // Make Add button focus after enter
 
         if (k) {
-          itemName = itemName.slice(0, -1); // trims last character
+          payload.itemName = payload.itemName.slice(0, -1); // trims last character
         }
 
-        const trimNewStr = itemName.trim();
+        const trimNewStr = payload.itemName.trim();
 
         const newStr = trimNewStr.replace(/\b\w/g, l => l.toUpperCase());
         console.log('NS:', newStr);
@@ -140,14 +141,20 @@ export default {
         const newStrIndex = this.shopListArray.indexOf(newStr);
 
         if (newStrIndex === -1) {
-          this.shopList.push({index: newStr, product: newStr, quantity: num, isUrgent: urgent}) //add the new task an object: property
+          this.shopList.push({
+            index: newStr,
+            product: newStr,
+            quantity: payload.num,
+            isUrgent: payload.urgent
+          })
+          //add the new task an object: property
           // check is already in the shopping and offer to merge
           console.log('test urgent',this.shopList);
-          this.newItem.splice(index, 1);
+          this.newItems.splice(payload.index, 1);
         } else {
-          this.shopList[newStrIndex].quantity = this.shopList[newStrIndex].quantity + num;
-          this.shopList[newStrIndex].isUrgent = urgent;
-          this.newItem.splice(index, 1); //use to remove from add to list
+          this.shopList[newStrIndex].quantity = this.shopList[newStrIndex].quantity + payload.num;
+          this.shopList[newStrIndex].isUrgent = payload.urgent;
+          this.newItems.splice(payload.index, 1); //use to remove from add to list
         }
 
         // check is already in the shopping and offer to merge
