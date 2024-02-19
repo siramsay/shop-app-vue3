@@ -16,7 +16,7 @@ export default {
   },
   emits: ["cancel-item","add-to-shop-list"],
   data: () => ({
-    selectNums: []
+    selectNums: [] as number[]
   }),
   methods: {
     addToShopList(currentList:boolean, num:number) {
@@ -44,9 +44,10 @@ export default {
     cancelNewItem() {
       this.$emit("cancel-item");
     },
-    makeSequence(): Array<number> {
-      return this.selectNums = [...Array(101).keys()]  //  todo: slice/pop 0 off the front
-    },
+    makeSequence() { this.selectNums = [...Array(101).keys()] }
+        //makeSequence(): Array<number> {
+        //  return this.selectNums = [...Array(101).keys()]  //  todo: slice/pop 0 off the front
+        //},
   },
   // Created cycle hook
   created() {
