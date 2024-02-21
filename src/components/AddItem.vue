@@ -1,5 +1,4 @@
 <script lang="ts">
-
 export default {
   props: {
     // If you have this prop. you will get a warning in console it is missing

@@ -1,8 +1,5 @@
 <script lang="ts"> // do not use setup
 //<script setup lang="ts">
-//import { RouterLink, RouterView } from 'vue-router'
-//import HelloWorld from './components/HelloWorld.vue'
-
 import ItemCard from "../components/ItemCard.vue";
 import AddItem from "../components/AddItem.vue";
 export default {
