@@ -4,6 +4,9 @@
 import { RouterView } from 'vue-router'
 
 export default {
+  components: {
+    RouterView
+  },
   methods: {
     focusInput() {
       document.querySelector("input").focus();
