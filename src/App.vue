@@ -1,4 +1,4 @@
-<script  lang="ts"> // Test
+<script  lang="ts"> // Test with new rule
 // <script lang="ts">  do not use setup if using export default
 //import { RouterLink, RouterView } from 'vue-router'
 import { RouterView } from 'vue-router'
