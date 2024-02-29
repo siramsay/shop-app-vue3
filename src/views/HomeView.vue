@@ -1,4 +1,4 @@
-<script lang="ts"> // do not use setup
+<script lang="ts">
 import ItemCard from "../components/ItemCard.vue";
 import AddItem from "../components/AddItem.vue";
 export default {
