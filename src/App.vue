@@ -1,11 +1,12 @@
 <script  lang="ts">
 // <script lang="ts">  do not use setup if using export default
 // import { RouterLink, RouterView } from 'vue-router'
-import { RouterView } from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router'
 
 export default {
   components: {
-    RouterView
+    RouterView,
+    RouterLink
   },
   methods: {
     focusInput() {
