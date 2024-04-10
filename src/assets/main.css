@@ -274,11 +274,14 @@ nav menu li svg {
   color: #f8f8f8;
   background-color: #d77504; /* AA */
 }
-.suggestion-outer-wrapper {
+.suggestion-outer-wrapper,
+.shopping-outer-wrapper {
   overflow-x: hidden;
   overflow-y: hidden;
   margin: 0;
   width: 100vw;
+}
+.suggestion-outer-wrapper {
   height: 165px;
 }
 /*  */
