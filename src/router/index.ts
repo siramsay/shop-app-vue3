@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import ShoplistView from "@/views/ShoplistView.vue";
 //import ShoppingView from '../views/ShoppingView.vue';
 
 const router = createRouter({
@@ -9,6 +10,11 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView
+    },
+    {
+      path: '/shop-list',
+      name: 'shoplist',
+      component: ShoplistView
     },
     {
       path: '/shopping',
