@@ -1,3 +1,11 @@
+# Shopping List App
+This project is a Vue 3 and TypeScript version of shop-app-vue2-cdn (https://github.com/siramsay/shop-app-vue2-cdn)
+
+## Prototype for UI/UX Project
+
+UX Case study (Coming Soon) <br/>
+High Fidelity Prototype (dribbble) https://dribbble.com/shots/15648497-Food-App-High-Fidelity-Prototype
+
 # vue-project
 
 This template should help get you started developing with Vue 3 in Vite.
