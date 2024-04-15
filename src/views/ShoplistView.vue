@@ -1,10 +1,15 @@
 <script lang="ts">
+import { mapStores } from 'pinia'
+import { useShoppingList } from '@/stores/ShoppingList'
+
 import ItemCard from "../components/ItemCard.vue";
+import ItemStoreCard from "../components/ItemStoreCard.vue";
 import AddItem from "../components/AddItem.vue";
 export default {
   components: {
     ItemCard,
-    AddItem
+    AddItem,
+    ItemStoreCard
   },
   data() {
     return {
@@ -14,7 +19,7 @@ export default {
       selectNums: [],
       shopListArray: [],
       shopList: [
-        {index: 'Fish', product: 'Fish', quantity: 20},
+        {index: 'Fish', product: 'Fish (data)', quantity: 20},
         {index: 'Burgers', product: 'Burgers', quantity: 4},
         {index: 'Potatoes', product: 'Potatoes', quantity: 10, isUrgent: true},
         {index: 'Apples', product: 'Apples', quantity: 12},
@@ -164,7 +169,7 @@ export default {
       }
     },
 
-    /* Sorts */
+    /* Sorts
     sortLowest() {
       this.shopList.sort((a, b) => a.quantity > b.quantity ? 1 : -1);
     },
@@ -185,22 +190,27 @@ export default {
         return 0;
       });
     },
-
+    */
 
   },
   computed: {
+    ...mapStores(useShoppingList),
+
+    // data computed
+    /*
     filteredFood() {
       let filter = new RegExp(this.filterText, 'i')
       return this.ratingsInfo.filter(el => el.title.match(filter))
-    },
+    },*/
 
     urgentItems(){
       return this.shopList.filter(e => e.isUrgent === true)
     },
+    /*
     notUrgentItems(){
       return this.shopList.filter(e => e.isUrgent === false)
     },
-
+*/
     filterPre() {
 
       /* Filter
@@ -296,8 +306,8 @@ export default {
     <div class="sl-inner-wrapper">
       <div class="sl">
         <ul>
-          <ItemCard
-              v-for="item in shopList.slice().reverse()"
+          <ItemStoreCard
+              v-for="item in ShoppingListStore.shopList.slice().reverse()"
               :item="item"
               :key="`item-${item.index}`"
           />
