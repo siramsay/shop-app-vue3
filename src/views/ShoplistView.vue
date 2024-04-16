@@ -18,7 +18,7 @@ export default {
       newItems: [],
       selectNums: [],
       shopListArray: [],
-      shopList: [
+      /*shopList: [
         {index: 'Fish', product: 'Fish (data)', quantity: 20},
         {index: 'Burgers', product: 'Burgers', quantity: 4},
         {index: 'Potatoes', product: 'Potatoes', quantity: 10, isUrgent: true},
@@ -28,7 +28,7 @@ export default {
         {index: 'Nacho', product: 'Nacho', quantity: 1, isUrgent: true},
         {index: 'Almond  Milk', product: 'Almond Milk', quantity: 1},
         {index: 'Cookies', product: 'Cookies', quantity: 1}
-      ],
+      ],*/
       placeHolder: '',
       previousProduct: ['Fish', 'Burgers', 'Potatoes', 'Apples', 'Pancake Mix', 'Chicken', 'Chilli', 'Chocolate','Beer','Lemon Juice','Pork'],
       preFilter: [],
@@ -204,7 +204,7 @@ export default {
     },*/
 
     urgentItems(){
-      return this.shopList.filter(e => e.isUrgent === true)
+      return this.ShoppingListStore.shopList.filter(e => e.isUrgent === true)
     },
     /*
     notUrgentItems(){
@@ -292,7 +292,7 @@ export default {
     <div class="sl-inner-wrapper">
       <div class="sl">
         <ul>
-          <ItemCard
+          <ItemStoreCard
               v-for="item in urgentItems.slice().reverse()"
               :item="item"
               :key="`item-${item.index}`"
