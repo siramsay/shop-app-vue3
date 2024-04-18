@@ -59,10 +59,12 @@ export default {
         this.createShopListArray();
         const newStrIndex = this.shopListArray.indexOf(capitalizedTrimmedInputItem);
 
+
         // if not in shop list add num is 1 : else item in shop list index is >= 0 then get quantity to add to num
         if (newStrIndex === -1) {
           this.newItems.push({index: this.inputItem, itemName: this.inputItem, num: 1});
           this.inputItem = '';
+          console.log(this.newItems);
         } else {
           this.newItems.push({
             index: this.inputItem,
@@ -107,8 +109,8 @@ export default {
     },
     createShopListArray() {
       this.shopListArray = [];
-      for (let i = 0; i < this.shopList.length; i++) {
-        this.shopListArray.push(this.shopList[i].index);
+      for (let i = 0; i < this.ShoppingListStore.shopList.length; i++) {
+        this.shopListArray.push(this.ShoppingListStore.shopList[i].index);
       }
     },
     //addToShopList(index, itemName, num, urgent, currentQuantity ) {
