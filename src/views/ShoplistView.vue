@@ -144,15 +144,15 @@ export default {
         const newStrIndex = this.shopListArray.indexOf(newStr);
 
         if (newStrIndex === -1) {
-          this.shopList.push({
+          this.ShoppingListStore.shopList.push({
             index: newStr,
-            product: newStr,
+            productName: newStr,
             quantity: payload.num,
             isUrgent: payload.urgent
           })
           //add the new task an object: property
           // check is already in the shopping and offer to merge
-          console.log('test urgent',this.shopList);
+          console.log('test urgent',this.ShoppingListStore.shopList);
           this.newItems.splice(payload.index, 1);
         } else {
           this.shopList[newStrIndex].quantity = this.shopList[newStrIndex].quantity + payload.num;

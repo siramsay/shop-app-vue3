@@ -32,7 +32,7 @@ export default {
     <h1>Shopping Now</h1>
     <ul>
       <li v-for="item in ShoppingListStore.shopList" :key="item.index">
-        {{ item.productName }} - {{ item.quantity }}
+        {{ item.productName }} - {{ item.quantitynpm startadd }}
         <!--
         {{ item.product }}
          .product gives Deprecated symbol used, consult docs for better alternative
