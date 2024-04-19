@@ -155,8 +155,8 @@ export default {
           console.log('test urgent',this.ShoppingListStore.shopList);
           this.newItems.splice(payload.index, 1);
         } else {
-          this.shopList[newStrIndex].quantity = this.shopList[newStrIndex].quantity + payload.num;
-          this.shopList[newStrIndex].isUrgent = payload.urgent;
+          this.ShoppingListStore.shopList[newStrIndex].quantity = this.ShoppingListStore.shopList[newStrIndex].quantity + payload.num;
+          this.ShoppingListStore.shopList[newStrIndex].isUrgent = payload.urgent;
           this.newItems.splice(payload.index, 1); //use to remove from add to list
         }
 
