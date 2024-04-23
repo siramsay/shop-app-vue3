@@ -48,6 +48,7 @@ export default {
       //document.querySelector("input").classList.add('add-item');
       //}
     },
+    // addItem is run using input. It can also handle previous items.
     addItem() {
       if (this.inputItem.length > 0) {
 
@@ -66,12 +67,13 @@ export default {
           this.inputItem = '';
           console.log(this.newItems);
         } else {
+          console.log('It is in shopListArray and has an index of ',newStrIndex )
           this.newItems.push({
             index: this.inputItem,
             itemName: this.inputItem,
             num: 0,
-            currentQuantity: this.shopList[newStrIndex].quantity,
-            message: `Item is already in list, you already have ${this.shopList[newStrIndex].quantity} ${this.inputItem}`
+            currentQuantity: this.ShoppingListStore.shopList[newStrIndex].quantity,
+            message: `Item is already in list, you already have ${this.ShoppingListStore.shopList[newStrIndex].quantity} ${this.inputItem}`
           });
           this.inputItem = '';
         }
@@ -97,8 +99,8 @@ export default {
           index: index,
           itemName: item,
           num: 0,
-          currentQuantity: this.shopList[newStrIndex].quantity,
-          message: `Item is already in list, you already have ${this.shopList[newStrIndex].quantity} ${item}`
+          currentQuantity: this.ShoppingListStore.shopList[newStrIndex].quantity,
+          message: `Item is already in list, you already have ${this.ShoppingListStore.shopList[newStrIndex].quantity} ${item}`
         });
       }
 
