@@ -13,6 +13,7 @@ export const useShoppingList = defineStore('ShoppingList', {
             {index: 'Almond  Milk', productName: 'Almond Milk (s)', quantity: 1},
             {index: 'Cookies', productName: 'Cookies (s)', quantity: 1}
         ],
+        previousProduct: ['Chips','Fish', 'Burgers', 'Potatoes', 'Apples', 'Pancake Mix', 'Chicken', 'Chilli', 'Chocolate','Beer','Lemon Juice','Pork'],
     }),
  //   getters: {
  //       shortUserList: (state) => {
