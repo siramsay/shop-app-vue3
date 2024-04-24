@@ -30,7 +30,7 @@ export default {
         {index: 'Cookies', product: 'Cookies', quantity: 1}
       ],*/
       placeHolder: '',
-      previousProduct: ['Fish', 'Burgers', 'Potatoes', 'Apples', 'Pancake Mix', 'Chicken', 'Chilli', 'Chocolate','Beer','Lemon Juice','Pork'],
+      previousProduct: [],
       preFilter: [],
       filterText: ''
     }
@@ -215,13 +215,16 @@ export default {
       return this.shopList.filter(e => e.isUrgent === false)
     },
 */
+    prevArray() {
+      return this.ShoppingListStore.previousProduct;
+    },
     filterPre() {
 
       /* Filter
   * Array.prototype.filter()
   * String.prototype.match()
   * */
-
+      this.previousProduct = this.prevArray;
       let filter = new RegExp(this.inputItem, 'i')
       return this.previousProduct.filter(el => el.match(filter));
 
@@ -252,7 +255,7 @@ export default {
     <h4>Suggested Regularly Bought</h4>
     <div class="suggestion-wrapper">
       <ul id="suggestion">
-        <li v-for="(item, index) in previousProduct"
+        <li v-for="(item, index) in this.ShoppingListStore.previousProduct"
             v-on:click="addPreviousItem(item, index)">{{ item }}</li>
       </ul>
     </div>
