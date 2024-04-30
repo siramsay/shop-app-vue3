@@ -382,6 +382,7 @@ nav menu li svg {
   border-radius: 50%;
   background-image: radial-gradient(white 50%,transparent 50%);
   /*height: 45px; fix funny Safari crop */
+  cursor: pointer;
 }
 .wrapper-button button[disabled] {
   background-image: radial-gradient(transparent 50%,transparent 50%);
@@ -405,6 +406,7 @@ span button.button-round,
   /*flex-basis: fit-content;*/
   box-shadow: 2px 2px hsla(0, 0%, 11%, 25%);
   width: 75px;
+  cursor: pointer;
 }
 li#prev,
 #suggestion li,
@@ -418,6 +420,8 @@ li#prev,
 
   box-shadow: 2px 2px hsla(0, 0%, 11%, 25%);
   height: 45px;
+  user-select: none;
+  cursor: pointer;
 }
 .edit-input {
   display: inline;
