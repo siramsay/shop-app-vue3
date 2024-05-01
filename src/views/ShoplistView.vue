@@ -263,6 +263,7 @@ export default {
 
   <!-- Suggestion: Preemptive Previous Product Suggestion -->
   <div v-if="inputItem.length > 0" class="suggestion-outer-wrapper preemptive-suggestions">
+    <h4>Did you mean?</h4>
     <div class="suggestion-wrapper" v-if="previousProduct">
       <div v-if="inputItem" class="previous-wrapper">
         <ul id="previous">
