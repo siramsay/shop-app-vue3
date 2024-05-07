@@ -78,7 +78,7 @@ export default {
           this.inputItem = '';
         }
 
-        document.querySelector("input").blur();
+        document.querySelector("input").disabled = true;
 
       } else {
         alert("You need to add an item")
@@ -105,9 +105,12 @@ export default {
       }
 
       this.inputItem = '';
+      document.querySelector("input").disabled = true;
     },
     cancelNewItem() {
       this.newItems.pop();
+      document.querySelector("input").disabled = false;
+      document.querySelector("input").blur();
     },
     createShopListArray() {
       this.shopListArray = [];
@@ -168,6 +171,8 @@ export default {
         //document.querySelector("input.add-item").setAttribute('placeholder', "&#xF044");
         //document.querySelector("input").style.fontSize = '2em';
         document.querySelector("input").classList.remove('add-item');
+        document.querySelector("input").disabled = false;
+        document.querySelector("input").blur();
       } else {
         alert("You need to add more than 0")
       }
