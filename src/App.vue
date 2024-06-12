@@ -248,7 +248,7 @@ export default {
         <ul>
           <li v-for="(item, index) in shopList.slice().reverse()">  <!-- Not working v-if="item.isUrgent" -->
             <span class="item" v-if="!item.edit">
-              <span class="product-title">{{ item.product }}</span>
+              <span class="product-title">{{ item.product }} ( {{ item.edit }} )</span>
               <span class="wrapper-button">
                 <span>{{ item.quantity }}</span>
               </span>
@@ -256,7 +256,7 @@ export default {
             </span>
 
             <div class="item" v-if="item.edit">
-              <span class="product-title">{{ item.product }}</span>
+              <span class="product-title">{{ item.product }} ( {{ item.edit }} )</span>
 
               <span class="wrapper-button">
                    <button :disabled="item.quantity <= 1" v-on:click="item.quantity = item.quantity-1">
